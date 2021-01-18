@@ -6,7 +6,7 @@
       :clipped="clipped"
       fixed
       app
-      class="side-bar"
+      class="side-bar elevation-15"
     >
     <h2 class='brand-header'><v-icon class="mdi-rotate-180 brand-icon">mdi-needle</v-icon>LASK</h2>
     <hr class="logo-seperator">
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 
 
@@ -146,8 +146,12 @@ export default {
     ...mapGetters(['loggedInUser', 'isAuthenticated' ]),
   },
   methods: {
+      ...mapMutations({
+       resetState:" resetState",
+    }),
     logout : async function() {
       await this.$auth.logout();
+      this.resetState()
       this.rightDrawer = false;
     },
     cancel : function() {
@@ -240,9 +244,10 @@ export default {
 
 /* logout */
 .logout{
-  position:absolute;
-  top: 40%;
-  left: 45%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 9999;
   width:300px
 }
@@ -273,4 +278,45 @@ export default {
   opacity: 0.6;
   z-index: 999;
 }
+
+.v-btn--outlined .v-btn__content .v-icon, .v-btn--round .v-btn__content .v-icon{
+  color:red
+}
+
+
+/* Table */
+tbody tr:nth-of-type(even) {
+  /* background-color:  rgb(240,244,230); */
+   background: rgb(245,243,246);
+}
+
+tbody tr:nth-of-type(odd) {
+   background-color: rgb(255, 255, 255);
+}
+.v-data-table__wrapper{
+  border-bottom-left-radius:8px ;
+  border-bottom-right-radius:8px ;
+}
+
+.v-data-table-header{
+   background: rgb(245,243,246);
+}
+.v-data-footer{
+  background: rgb(245,243,246);
+    border-bottom-left-radius:8px ;
+  border-bottom-right-radius:8px ;
+  padding: 3px 0;
+}
+.v-data-footer__select{
+  display: none;
+
+
+}
+/* End of table */
+
+/* .container{
+  padding: 0;
+  padding-top:12px ;
+} */
+
 </style>

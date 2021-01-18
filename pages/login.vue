@@ -5,7 +5,7 @@
         <div class="column is-4 is-offset-4"> -->
           <h2 class="title has-text-centered">Welcome back!</h2>
 
-          <!-- <Notification :message="error" v-if="error"/> -->
+          <Notification :message="error" v-if="error" id='notification'/>
 
           <v-form method="post" @submit.prevent="login">
 
@@ -54,13 +54,13 @@
 </template>
 
 <script>
-// import Notification from '~/components/Notification';
+import Notification from '~/components/Notification';
 
 export default {
   // middleware: 'guest',
 
   components: {
-    // Notification,
+    Notification,
   },
 
   data() {
@@ -79,17 +79,29 @@ export default {
             email: this.email,
             password: this.password,
           },
-        });
-        // this.$router.push('/admin');
+        })
+        .then(response =>{
+        this.$router.push('/');
+        })
+  
       } catch (e) {
-        console.log(e)
-        console.log(e.response)
-        // console.log(error)
-        this.error = e.response.data.message;
-        this.error = "Email/password is incorrect";
+        this.error = [{msg:"Email/password is incorrect"}];
       }
     },
+
+    track: function() {
+      window.onclick = (event) => {
+        const modal = document.getElementById('notification')
+        if( event.target != modal){
+          this.error = null;
+        }
+      } 
+    }
   },
+
+    mounted() {
+    this.track();
+  }
 };
 </script>
 
@@ -104,7 +116,8 @@ export default {
  }
 
  .control{
-   outline: 1px;
+  outline: 1px;
+  width: 250px;
  }
 
 .register{

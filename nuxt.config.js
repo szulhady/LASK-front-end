@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    'plugins/echarts.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -84,6 +85,12 @@ export default {
     ]
   },
   auth: {
+    // localStorage: false,
+    // cookie: {
+    //   options: {
+    //     expires: 0.01
+    //   }
+    // },
     resetOnError: true,
     redirect: {
       login: '/login', // User will be redirected to this path if login is required.
@@ -94,6 +101,19 @@ export default {
     },
     strategies: {
       local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          maxAge: 10,
+          type: 'Bearer'
+        },
+        refreshToken: {
+        // property: 'refresh_token',
+        // data: 'refresh_token',
+        // // maxAge: 60 * 60 * 24 * 30
+        // maxAge: 10
+         required:false
+        },
         endpoints: {
           login: {
             url: '/login',
@@ -108,7 +128,7 @@ export default {
           }
         },
         tokenRequired: true,
-        tokenType: 'Bearer'
+        // tokenType: 'Bearer'
       }
 }
 }

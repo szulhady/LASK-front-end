@@ -43,6 +43,7 @@ mounted: async function(){
       createObject();
 
       renderer.setAnimationLoop( () => {
+  
           render()
       } );
 
@@ -95,7 +96,7 @@ mounted: async function(){
     const loader = new GLTFLoader();
     loader.load( 'mandible4.gltf', (data) => {
       const gltf = data;
-      console.log(gltf);
+      // console.log(gltf);
       const obj = gltf.scene;
       for(let i = 0; i < obj.children.length; i++ ){
         const mesh = obj.children[i];
@@ -109,6 +110,7 @@ mounted: async function(){
       group.add(sensor2);
       group.add(sensor3);
       group.scale.set( 0.15, 0.15, 0.15 );
+      group.rotation.set( 0, 0, -0.2 )
       group.position.set( 0, 2, 0 )
       scene.add( group ) // add object in scene
     });
@@ -193,10 +195,13 @@ mounted: async function(){
 
 #model{
   margin: 0;
-  height: 500px;
+  height: 600px;
+  border-radius:60px;
 }
 
 canvas{
-  border-radius:10px
+  border-radius:8px;
+  max-width: 100%;
+  width: 100%!important;
 }
 </style>

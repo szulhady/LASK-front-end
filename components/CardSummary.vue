@@ -4,7 +4,7 @@
     <v-row >
       <v-col v-for="(card,index) in cards" :key="index" :cols="card.cols" >
 
-        <v-card class="right elevation-8 border-rounded card-color">
+        <v-card class="right elevation-12 border-rounded card-color">
           <v-row>
             <v-col  cols="5" class="left">
               <v-icon :class="card.icon" :color="card.class" size="70">
@@ -15,7 +15,7 @@
                 <v-card-subtitle class="font card-desc">{{
                  card.description}}
                 </v-card-subtitle>
-              <v-card-title class="font font-big display-2">{{ card.data }}</v-card-title>
+              <v-card-title class="font font-big ">{{ card.data }}</v-card-title>
             </v-col>
           </v-row>
           <!-- <hr class='hr'>
@@ -33,15 +33,15 @@
 </template>
 
 <script>
-// import { mapState} from "vuex";
+import { mapState} from "vuex";
 export default {
 
-  props:["cards"],
-  //   computed: {
-  //   ...mapState({
-  //     duration: (state) => state.duration,
-  //   }),
-  // },
+  // props:["cards"],
+    computed: {
+    ...mapState({
+      cards: (state) => state.cards,
+    }),
+  },
 };
 </script>
 
@@ -73,11 +73,12 @@ export default {
 }
 
 .font {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  color: #666;
 }
 
 .font-big{
-  font-size:1.8em;
+  font-size:2.3em;
   padding-top: 10px ;
   padding-right:30px ;
 }
